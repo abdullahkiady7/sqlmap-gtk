@@ -27,14 +27,14 @@ class Api(object):
     _password = self.m._page4_password_entry.get_text().strip()
     if _host:
       try:
-        _resp = requests.get('http://%s/task/new' % _host,
+        _resp = requests.get(f'http://{_host}/task/new',
                              auth = (_username, _password))
         if not _resp:
           _resp.raise_for_status()
 
         _resp = _resp.json()
         if _resp['success']:
-          self.task_view_append('%s: success.' % _resp['taskid'])
+          self.task_view_append('{}: success.'.format(_resp['taskid']))
       except Exception as e:
         self.task_view_append(e)
 
@@ -48,7 +48,7 @@ class Api(object):
     _password = self.m._page4_password_entry.get_text().strip()
     if _host and _token:
       try:
-        _resp = requests.get('http://%s/admin/%s/list' % (_host, _token),
+        _resp = requests.get(f'http://{_host}/admin/{_token}/list',
                              auth = (_username, _password))
         if not _resp:
           _resp.raise_for_status()
@@ -88,8 +88,8 @@ class Api(object):
             _option_set_btn = g.Button.new_with_label(_('set:'))
             _option_set_btn.connect('clicked', self.option_set, _taskid)
             _id += 1
-            _a_row_box_tmp.pack_start(g.Label.new('%s. %s' % (_id, _taskid)), False, True, 5)
-            _a_row_box_tmp.pack_start(g.Label.new('(%s)' % _status), False, True, 0)
+            _a_row_box_tmp.pack_start(g.Label.new(f'{_id}. {_taskid}'), False, True, 5)
+            _a_row_box_tmp.pack_start(g.Label.new(f'({_status})'), False, True, 0)
             _a_row_box_tmp.pack_start(_task_del_btn, False, True, 1)
             _a_row_box_tmp.pack_start(_scan_kill_btn, False, True, 1)
             _a_row_box_tmp.pack_start(_scan_stop_btn, False, True, 1)
@@ -108,7 +108,7 @@ class Api(object):
       except Exception as e:
         self.task_view_append(e)
     else:
-        self.task_view_append('需要填写API server和admin token.')
+        self.task_view_append('need API server and admin token.')
 
   def option_list(self, button, taskid):
     '''
@@ -128,7 +128,7 @@ class Api(object):
         if _resp['success']:
           for _key, _value in _resp['options'].items():
             if _value:
-              self.task_view_append('%s: %s' % (_key, _value))
+              self.task_view_append(f'{_key}: {_value}')
       except Exception as e:
         self.task_view_append(e)
 
@@ -144,7 +144,7 @@ class Api(object):
     for _tmp in _buffer_text.split():
       _options[_tmp] = None
     if _host and _options:
-      _mesg = '%s:\n' % taskid
+      _mesg = f'{taskid}:\n'
       try:
         _headers = {'Content-Type': 'application/json'}
         _resp = requests.post('http://%s/option/%s/get' % (_host, taskid),
@@ -182,7 +182,7 @@ class Api(object):
     except Exception as e:
       _json = str(e)
 
-    _mesg = '%s: ' % taskid
+    _mesg = f'{taskid}: '
     if _json and isinstance(_json, dict):
       if _host:
         try:
@@ -311,7 +311,7 @@ class Api(object):
     _username = self.m._page4_username_entry.get_text().strip()
     _password = self.m._page4_password_entry.get_text().strip()
     if _host:
-      _mesg = '%s: ' % taskid
+      _mesg = f'{taskid}: '
       try:
         _resp = requests.get('http://%s/scan/%s/kill' % (_host, taskid),
                              auth = (_username, _password))
@@ -347,7 +347,7 @@ class Api(object):
         # print(_resp)    # _resp['data'], _resp['error'] are list
         if _resp['success']:
           del[_resp['success']]
-          _mesg = '%s%s' % (_mesg, _resp)
+          _mesg = f'{_mesg}{_resp}'
       except Exception as e:
         _mesg += str(e)
       self.task_view_append(_mesg)
@@ -395,7 +395,7 @@ class Api(object):
     _mark = _task_view_textbuffer.get_mark('end')
     _end = _task_view_textbuffer.get_iter_at_mark(_mark)
 
-    _task_view_textbuffer.insert(_end, '%s\n' % output)
+    _task_view_textbuffer.insert(_end, f'{output}\n')
 
     self.m._page4_task_view.grab_focus()
     # https://stackoverflow.com/questions/48934458/gtk-sourceview-scroll-to-mark-not-working

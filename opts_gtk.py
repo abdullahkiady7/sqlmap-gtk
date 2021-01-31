@@ -9,6 +9,11 @@ from widgets import (HORIZONTAL, VERTICAL)
 class Notebook(g.Notebook):
   '''
   m: model.Model
+  最大的宽应该是由最长的 request定制的第一行 决定
+
+  如果所有标签页全用ScrolledWindow的话, UI的尺寸(size)会变得很小
+  以"Other"标签的height作为标准高,
+  高于此height的标签页使用ScrolledWindow, 显示滚动条
   '''
   def __init__(self, m, handlers):
     super().__init__()
@@ -892,23 +897,13 @@ class Notebook(g.Notebook):
     return _f
 
   def build_page1_other(self):
-    '''
-    最大的宽应该是由最长的 request定制的第一行 决定
-
-    如果所有标签页全用ScrolledWindow的话, UI的尺寸(size)会变得很小
-    以"其他"标签的height作为标准高,
-    高于此height的标签页使用ScrolledWindow, 显示滚动条
-    '''
     box = Box(orientation=VERTICAL)
 
-    _row1 = Box()
+    _row1, _row2 = (Box(), Box())
     _page1_other_general_area = self.build_page1_other_general(self.m)
-
-    _row1.pack_start(_page1_other_general_area, True, True, 5)
-
-    _row2 = Box()
     _page1_other_misc_area = self.build_page1_other_misc(self.m)
 
+    _row1.pack_start(_page1_other_general_area, True, True, 5)
     _row2.pack_start(_page1_other_misc_area, True, True, 5)
 
     box.add(_row1)

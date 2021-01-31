@@ -78,12 +78,13 @@ class Handler(object):
     '''
     data: [file_entry, 'title of chooser']
     '''
-    if len(data) > 1:
+    if len(data) > 1:   # choose folder
       dialog = g.FileChooserDialog(data[1], self.w,
                                    g.FileChooserAction.SELECT_FOLDER,
                                    ('_Cancel', g.ResponseType.CANCEL,
                                     '_Select', g.ResponseType.OK))
     else:
+      # 点击左侧的 最近使用 可选择目录, 小问题, 不用管.
       dialog = g.FileChooserDialog("choose file", self.w,
                                    g.FileChooserAction.OPEN,
                                    ('_Cancel', g.ResponseType.CANCEL,
@@ -111,7 +112,7 @@ class Handler(object):
 
     if _load_url:
       if not _load_url.startswith('http'):
-        _load_url = 'http://' + _load_url
+        _load_url = f'http://{_load_url}'
 
       _load_host = urlparse(_load_url).netloc
 
@@ -134,7 +135,7 @@ class Handler(object):
           for _line_tmp in _line_list_tmp:
             _log_view_textbuffer.insert(_end, _line_tmp)
         else:
-          _log_view_textbuffer.insert(_end, '%s: empty file.' % str(file_path))
+          _log_view_textbuffer.insert(_end, f'{file_path}: empty file.')
     except EnvironmentError as e:
       _log_view_textbuffer.insert(_end, str(e))
     finally:
@@ -178,7 +179,7 @@ class Handler(object):
 
   def _get_target(self):
     m = self.m
-    _current_pagenum = self.w._target_notebook.get_current_page()
+    _pagenum = self.w._target_notebook.get_current_page()
     _target_list = [("-u", m._url_combobox.get_child().get_text),
                     ("-l", m._burp_logfile.get_text),
                     ("-r", m._request_file.get_text),
@@ -187,9 +188,9 @@ class Handler(object):
                     ("-g", m._google_dork.get_text),
                     ("-d", m._direct_connect.get_text)]
 
-    _ = _target_list[_current_pagenum][1]().strip()
+    _ = _target_list[_pagenum][1]().strip()
     if _:
-      return "{} {}".format(_target_list[_current_pagenum][0], quote(_))
+      return "{} {}".format(_target_list[_pagenum][0], quote(_))
 
   def _collect_opts(self):
     m = self.m
@@ -748,7 +749,7 @@ class Handler(object):
     _pass = m._request_area_proxy_password_entry.get_text()
 
     if all((_use_proxy, _username, _pass)) :
-      return '{}{}:{}'.format(opt_str, _username, _pass)
+      return f'{opt_str}{_username}:{_pass}'
 
   def _get_http_proxy(self, opt_str):
     m = self.m
@@ -758,8 +759,8 @@ class Handler(object):
 
     if _use_proxy and _ip:
       if _port:
-        _port = ':%s' % _port
-      return "{}{}{}".format(opt_str, _ip, _port)
+        _port = f':{_port}'
+      return f"{opt_str}{_ip}{_port}"
 
   def _get_tampers(self, opt_str, tampers):
     _checked = []
@@ -769,7 +770,7 @@ class Handler(object):
 
     _ = ','.join(_checked)
     if _:
-      return "{}{}".format(opt_str, _)
+      return f"{opt_str}{_}"
 
   # def _get_tampers(self, opt_str, textview):
   #   _tamper_textbuffer = textview.get_buffer()
@@ -783,7 +784,7 @@ class Handler(object):
 
   def _get_text_from_scale(self, opt_str, ckbtn, scale):
     if ckbtn.get_active():
-      return "{}{}".format(opt_str, int(scale.get_value()))
+      return f'{opt_str}{int(scale.get_value())}'
 
   def _get_text_only_ckbtn(self, opt_str, ckbtn):
     if ckbtn.get_active():

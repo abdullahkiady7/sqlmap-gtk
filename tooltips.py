@@ -579,7 +579,7 @@ class Widget_Mesg(object):
     self._set_tooltip('-z MNEMONICS Use short mnemonics (e.g. "flu,bat,ban,tec=EU")',
                       m._misc_area_z_ckbtn,
                       m._misc_area_z_entry)
-    # API区(page4)
+    # SQLMAPAPI(page4)
     self._set_tooltip('sqlmapapi.py -s --username="admin" --password="secret"',
                       m._page4_api_server_label,
                       m._page4_api_server_entry)

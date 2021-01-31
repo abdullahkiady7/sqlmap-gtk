@@ -113,27 +113,27 @@ class Window(g.Window):
     # 不然page1的_notebook处理完信号后, 会传递给父容器的main_notebook
     return True
 
-  def set_file_entry_text(self, button, data):
-    '''
-    data: [file_entry, 'title of chooser']
-    '''
-    if len(data) > 1:   # choose folder
-      dialog = g.FileChooserDialog(data[1], self,
-                                   g.FileChooserAction.SELECT_FOLDER,
-                                   ('_Cancel', g.ResponseType.CANCEL,
-                                    '_Select', g.ResponseType.OK))
-    else:
-      # 点击左侧的 最近使用 可选择目录, 小问题, 不用管.
-      dialog = g.FileChooserDialog("choose file", self,
-                                   g.FileChooserAction.OPEN,
-                                   ('_Cancel', g.ResponseType.CANCEL,
-                                    '_OK', g.ResponseType.OK))
-    try:
-      if dialog.run() == g.ResponseType.OK:
-        data[0].set_text(dialog.get_filename())
-        data[0].grab_focus()
-    finally:
-      dialog.destroy()
+  # def set_file_entry_text(self, button, data):
+  #   '''
+  #   data: [file_entry, 'title of chooser']
+  #   '''
+  #   if len(data) > 1:   # choose folder
+  #     dialog = g.FileChooserDialog(data[1], self,
+  #                                  g.FileChooserAction.SELECT_FOLDER,
+  #                                  ('_Cancel', g.ResponseType.CANCEL,
+  #                                   '_Select', g.ResponseType.OK))
+  #   else:
+  #     # 点击左侧的 最近使用 可选择目录, 小问题, 不用管.
+  #     dialog = g.FileChooserDialog("choose file", self,
+  #                                  g.FileChooserAction.OPEN,
+  #                                  ('_Cancel', g.ResponseType.CANCEL,
+  #                                   '_OK', g.ResponseType.OK))
+  #   try:
+  #     if dialog.run() == g.ResponseType.OK:
+  #       data[0].set_text(dialog.get_filename())
+  #       data[0].grab_focus()
+  #   finally:
+  #     dialog.destroy()
 
   def clear_all_entry(self, button):
     for _i in dir(m):
