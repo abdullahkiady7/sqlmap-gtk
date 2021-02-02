@@ -217,12 +217,12 @@ class Widget_Mesg(object):
         'unchecked: select \'foobar\' become select char(102)+char(111)...\n'
         'checked:  original palyload become longer.',
                       m._inject_area_no_escape_ckbtn)
-    self._set_tooltip('--invalid-logical\n'
-        'True: id=13, False: id=13 AND 18=19',
-                      m._inject_area_invalid_logical_ckbtn)
     self._set_tooltip('--invalid-bignum\n'
         'True: id=13, False: id=99999999',
                       m._inject_area_invalid_bignum_ckbtn)
+    self._set_tooltip('--invalid-logical\n'
+        'True: id=13, False: id=13 AND 18=19',
+                      m._inject_area_invalid_logical_ckbtn)
     self._set_tooltip('--invalid-string\n'
         'True: id=13, False: id=akewmc',
                       m._inject_area_invalid_string_ckbtn)
@@ -415,7 +415,7 @@ class Widget_Mesg(object):
         '  -T=comma-separated table name\n'
         '  -D=comma-separated DB name',
                       m._dump_area_search_ckbtn)
-    self._set_tooltip('--exclude-sysdb\n'
+    self._set_tooltip('--exclude-sysdbs\n'
         'Note: on sql server, master is not considered a system database.',
                       m._dump_area_no_sys_db_ckbtn)
     self._set_tooltip('-D DB\n'

@@ -181,12 +181,12 @@ class Widget_Mesg(object):
         '注: 默认 select \'foobar\' 会变成 select char(102)+char(111)...\n'
         '    优点: 转义引号, 绕过; 缺点: 长度变长',
                       m._inject_area_no_escape_ckbtn)
-    self._set_tooltip('--invalid-logical\n'
-        '真: id=13, 假: id=13 AND 18=19',
-                      m._inject_area_invalid_logical_ckbtn)
     self._set_tooltip('--invalid-bignum\n'
         '真: id=13, 假: id=99999999',
                       m._inject_area_invalid_bignum_ckbtn)
+    self._set_tooltip('--invalid-logical\n'
+        '真: id=13, 假: id=13 AND 18=19',
+                      m._inject_area_invalid_logical_ckbtn)
     self._set_tooltip('--invalid-string\n'
         '真: id=13, 假: id=akewmc',
                       m._inject_area_invalid_string_ckbtn)
@@ -487,7 +487,7 @@ class Widget_Mesg(object):
         '  -T=逗号分隔的表名: 将在所有DB中 搜索指定表名\n'
         '  -D=逗号分隔的数据库名: 将 搜索指定库名\n',
                       m._dump_area_search_ckbtn)
-    self._set_tooltip('--exclude-sysdb\n'
+    self._set_tooltip('--exclude-sysdbs\n'
         '注: sql server上 master库不视为系统库',
                       m._dump_area_no_sys_db_ckbtn)
     self._set_tooltip('--dump-all',

@@ -166,10 +166,10 @@ class Notebook(g.Notebook):
     _invalid_label.set_tooltip_text('default:\nTrue: id=13, False: id=-13')
     i += 1
     _boxes[i].pack_start(_invalid_label, False, True, 5)
-    _boxes[i].pack_end(m._inject_area_invalid_logical_ckbtn, False, True, 5)
-    i += 1
     _boxes[i].pack_end(m._inject_area_invalid_bignum_ckbtn, False, True, 5)
+    i += 1
     _boxes[i].pack_end(m._inject_area_invalid_string_ckbtn, False, True, 5)
+    _boxes[i].pack_end(m._inject_area_invalid_logical_ckbtn, False, True, 5)
 
     _inject_area_opts = Box(orientation=VERTICAL, spacing=3)
     for _ in _boxes:
