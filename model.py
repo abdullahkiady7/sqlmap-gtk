@@ -14,14 +14,16 @@ class Model(object):
   def __init__(self, language):
     mo_filename = "sqlmap_gtk"
     mo_base_folder = os.path.abspath("static/locale")
-    _ = self._
     try:
       if language == 'zh':
-        lang_zh = gettext.translation(mo_filename, mo_base_folder, languages = ["zh_CN"])
-        _ = lang_zh.gettext
+        _zh = gettext.translation(mo_filename,
+                                  mo_base_folder,
+                                  languages = ["zh_CN"])
+        self._ = _zh.gettext
     except FileNotFoundError as e:
       print(e)
 
+    _ = self._
     # 1. %s;(\('.*'\);(_(\1);g
     # 2. fix _enum_area_opts_ckbtns
     # TARGET
