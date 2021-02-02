@@ -533,6 +533,7 @@ class Widget_Mesg(object):
         'Clean up the DBMS from sqlmap specific UDF and tables',
                       m._misc_area_cleanup_ckbtn)
     self._set_tooltip('Parameter(s) containing Base64 encoded data',
+                      m._general_area_base64_ckbtn,
                       m._general_area_base64_entry)
     self._set_tooltip('Use URL and filename safe Base64 alphabet (RFC 4648)',
                       m._general_area_base64_safe_ckbtn)

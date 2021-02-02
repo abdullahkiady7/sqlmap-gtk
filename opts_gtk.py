@@ -335,25 +335,30 @@ class Notebook(g.Notebook):
   def build_page1_setting_hidden(self, m):
     _f = Frame.new(m._('Hidden'))
     _boxes = [Box() for _ in range(6)]
-
-    _boxes[0].pack_start(m._hidden_area_crack_ckbtn, False, True, 5)
-    _boxes[0].pack_start(m._hidden_area_debug_ckbtn, False, True, 5)
-    _boxes[0].pack_start(m._hidden_area_profile_ckbtn, False, True, 5)
-    _boxes[1].pack_start(m._hidden_area_disable_stats_ckbtn, False, True, 5)
-    _boxes[1].pack_start(m._hidden_area_disable_precon_ckbtn, False, True, 5)
-    _boxes[2].pack_start(m._hidden_area_force_dbms_ckbtn, False, True, 5)
-    _boxes[2].pack_start(m._hidden_area_force_dns_ckbtn, False, True, 0)
-    _boxes[2].pack_start(m._hidden_area_force_pivoting_ckbtn, False, True, 5)
-    _boxes[3].pack_start(m._hidden_area_smoke_test_ckbtn, False, True, 5)
-    _boxes[3].pack_start(m._hidden_area_live_test_ckbtn, False, True, 5)
-    _boxes[3].pack_start(m._hidden_area_vuln_test_ckbtn, False, True, 5)
-    _boxes[4].pack_start(m._hidden_area_murphy_rate_ckbtn, False, True, 5)
-    _boxes[4].pack_start(m._hidden_area_stop_fail_ckbtn, False, True, 5)
-    _boxes[4].pack_start(m._hidden_area_run_case_ckbtn, False, True, 5)
-    _boxes[5].pack_start(m._hidden_area_dummy_ckbtn, False, True, 5)
-    _boxes[5].pack_start(m._hidden_area_api_ckbtn, False, True, 5)
-    _boxes[5].pack_start(m._hidden_area_taskid_ckbtn, False, True, 5)
-    _boxes[5].pack_start(m._hidden_area_database_ckbtn, False, True, 5)
+    _ = 0
+    _boxes[_].pack_start(m._hidden_area_crack_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_debug_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_profile_ckbtn, False, True, 5)
+    _ += 1
+    _boxes[_].pack_start(m._hidden_area_disable_precon_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_disable_stats_ckbtn, False, True, 5)
+    _ += 1
+    _boxes[_].pack_start(m._hidden_area_force_dbms_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_force_dns_ckbtn, False, True, 0)
+    _boxes[_].pack_start(m._hidden_area_force_pivoting_ckbtn, False, True, 5)
+    _ += 1
+    _boxes[_].pack_start(m._hidden_area_smoke_test_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_live_test_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_vuln_test_ckbtn, False, True, 5)
+    _ += 1
+    _boxes[_].pack_start(m._hidden_area_murphy_rate_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_stop_fail_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_run_case_ckbtn, False, True, 5)
+    _ += 1
+    _boxes[_].pack_start(m._hidden_area_dummy_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_api_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_taskid_ckbtn, False, True, 5)
+    _boxes[_].pack_start(m._hidden_area_database_ckbtn, False, True, 5)
 
     _hidden_area_opts = Box(orientation=VERTICAL, spacing=5)
     for _ in _boxes:
